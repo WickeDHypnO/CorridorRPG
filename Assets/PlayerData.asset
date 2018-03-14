@@ -11,11 +11,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec21be2748caaa44fafaff533dc6a7b0, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
+  level: 2
   health: 300
+  mana: 100
+  manaRegenPerTurn: 10
   strength: 2
   speed: 4
   skills:
   - {fileID: 11400000, guid: 4452d8184b3679c478905ac2a818e91e, type: 2}
-  - {fileID: 11400000, guid: 4452d8184b3679c478905ac2a818e91e, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 99f88a50f19ce984fa4e581fc254a2ba, type: 2}
+  - {fileID: 11400000, guid: f43959a233926df44b77bd8b2ba689d0, type: 2}
   - {fileID: 0}

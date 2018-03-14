@@ -7,7 +7,9 @@ public enum SkillType
 {
     Physical,
     Fire,
-    Ice
+    Ice,
+    Heal,
+    Buff
 }
 
 public class SkillData : ScriptableObject
@@ -16,6 +18,8 @@ public class SkillData : ScriptableObject
     public Sprite skilImage;
     public GameObject skillEffect;
     public string skillName;
+    public float skillCost;
     public float baseDamage;
     public float damageMultiplier;
+    public bool dealDamage;
 }

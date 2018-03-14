@@ -2,15 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyEventDispatcher : MonoBehaviour {
+public class EnemyEventDispatcher : MonoBehaviour
+{
 
     public Enemy controller;
-	
-	void Destroy () {
+
+    void Die()
+    {
+        controller.Die();
+    }
+
+    void Destroy()
+    {
         controller.Destroy();
-	}
-	
-	void AttackPlayer() {
+    }
+
+    void AttackPlayer()
+    {
         controller.AttackPlayer();
-	}
+    }
 }

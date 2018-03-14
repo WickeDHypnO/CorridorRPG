@@ -3,34 +3,47 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Enemy : MonoBehaviour {
+public class Enemy : MonoBehaviour
+{
 
     public EnemyStats enemyData;
     EnemyStats currentStats;
     public Slider healthSlider;
     public Transform effectPosition;
+    public Transform head;
     float maxHealth;
+    bool selectable = true;
 
-	void OnDestroy() {
+    void OnDestroy()
+    {
         FindObjectOfType<FightController>().enemies.Remove(this);
-        FindObjectOfType<FightController>().Select(null);
     }
-	
-	void OnEnable()
+
+    void OnEnable()
     {
         maxHealth = enemyData.health;
         currentStats = Instantiate(enemyData);
-       // FindObjectOfType<FightController>().enemies.Add(this);
+        healthSlider = FindObjectOfType<UIHealthBars>().GetHealthBar();
+        // FindObjectOfType<FightController>().enemies.Add(this);
     }
 
     void OnMouseDown()
     {
+        if(selectable)
         FindObjectOfType<FightController>().Select(this);
     }
 
     public void Destroy()
     {
         Destroy(gameObject);
+    }
+
+    void Update()
+    {
+        if(healthSlider)
+        {
+            healthSlider.GetComponent<RectTransform>().position = Camera.main.WorldToScreenPoint(head.position + Vector3.up * 0.3f);
+        }
     }
 
     public void DealDamage(float damage)
@@ -44,6 +57,13 @@ public class Enemy : MonoBehaviour {
         }
         else
             GetComponent<EnemyAnimations>().PlayHit();
+    }
+
+    public void Die()
+    {
+        selectable = false;
+        FindObjectOfType<UIHealthBars>().RevokeHealthBar(healthSlider);
+        FindObjectOfType<FightController>().Select(null);
     }
 
     public void AttackPlayer()

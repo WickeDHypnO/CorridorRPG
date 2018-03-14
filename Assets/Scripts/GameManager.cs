@@ -13,7 +13,9 @@ public class GameManager : MonoBehaviour {
     public Slider healthSlider;
     public Slider manaSlider;
     float maxHealth;
-    PlayerStats playerGameData;
+    float maxMana;
+    [HideInInspector]
+    public PlayerStats playerGameData;
     public UIController uiController;
     public GameObject boss;
 
@@ -21,6 +23,7 @@ public class GameManager : MonoBehaviour {
         playerGameData = Instantiate(playerData);
         generator = FindObjectOfType<MapGenerator>();
         maxHealth = playerData.health;
+        maxMana = playerData.mana;
 	}
 	
 	public void SpawnEnemies () {
@@ -66,6 +69,12 @@ public class GameManager : MonoBehaviour {
         {
             //DEAD
         }
+    }
+
+    public void SpendMana(float cost)
+    {
+        playerGameData.mana -= cost;
+        manaSlider.value = playerGameData.mana / maxMana;
     }
 
     internal void NextRoom()

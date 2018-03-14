@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class FightController : MonoBehaviour
 {
-    Enemy selected;
+    [HideInInspector]
+    public Enemy selected;
     public List<Enemy> enemies = new List<Enemy>();
     public List<GameObject> attacking = new List<GameObject>();
     public GameObject selectedIndicator;
@@ -43,21 +44,41 @@ public class FightController : MonoBehaviour
     {
         //Enable skill buttons
         FindObjectOfType<UIController>().SetSkillBarVisible(true);
+        FindObjectOfType<GameManager>().SpendMana(-FindObjectOfType<GameManager>().playerGameData.manaRegenPerTurn);
         // EndPlayerTurn();
         Debug.Log("playerTurn");
     }
 
     public void DoSkill(SkillData skillData)
     {
-        selected.DealDamage(skillData.baseDamage + skillData.damageMultiplier * FindObjectOfType<GameManager>().playerData.strength);
-        Instantiate(skillData.skillEffect, selected.effectPosition.position, Quaternion.identity);
+        if (skillData.skillType != SkillType.Buff && skillData.skillType != SkillType.Heal)
+        {
+            if (skillData.dealDamage)
+                selected.DealDamage(skillData.baseDamage + skillData.damageMultiplier * FindObjectOfType<GameManager>().playerData.strength);
+        }
+        else
+        {
+            if (skillData.skillType == SkillType.Heal)
+                FindObjectOfType<GameManager>().DealDamageToPlayer(-(skillData.baseDamage + FindObjectOfType<GameManager>().playerGameData.level * skillData.damageMultiplier));
+        }
+        if (skillData.skillType != SkillType.Buff && skillData.skillType != SkillType.Heal)
+        {
+            Instantiate(skillData.skillEffect, selected.effectPosition.position, Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(skillData.skillEffect, Vector3.zero, Quaternion.identity);
+        }
+        FindObjectOfType<GameManager>().SpendMana(skillData.skillCost);
     }
 
     public void EndPlayerTurn(SkillData skillData)
     {
         //Disable buttons
-        if (selected)
+        if (skillData.skillType == SkillType.Heal || skillData.skillType == SkillType.Buff || selected)
         {
+            if(skillData.skillCost < FindObjectOfType<GameManager>().playerGameData.mana)
+            {
             FindObjectOfType<UIController>().SetSkillBarVisible(false);
             DoSkill(skillData);
             //AttackSelected();
@@ -66,6 +87,11 @@ public class FightController : MonoBehaviour
             attacking.Add(temp);
             Debug.Log("endedTurn");
             StartCoroutine(StartEnemyTurn());
+            }
+            else
+            {
+                Debug.Log("You don't have enought mana");
+            }
         }
     }
 
@@ -93,12 +119,11 @@ public class FightController : MonoBehaviour
         }
     }
 
-    public void AttackSelected()
+    public void AttackSelected(SkillData skillData)
     {
         if (selected)
         {
-            selected.DealDamage(FindObjectOfType<GameManager>().playerData.strength);
-            //selected.GetComponent<EnemyAnimations>().PlayHit();
+            selected.DealDamage(skillData.baseDamage + skillData.damageMultiplier * FindObjectOfType<GameManager>().playerData.strength);
         }
     }
 
