@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Name: Attack
   m_EditorClassIdentifier: 
   skillType: 0
-  skilImage: {fileID: 21300000, guid: 28b41fef228d6814f90e541deaf9f262, type: 3}
+  skilImage: {fileID: 21300000, guid: db06b3bab685864449d9fd9144d46221, type: 3}
   skillEffect: {fileID: 1404780879444462, guid: 7f0fa82c0b5c20b43a76dfd5c6b4b670,
     type: 2}
   skillName: Attack
+  skillCost: 0
   baseDamage: 20
   damageMultiplier: 3
   dealDamage: 1
+  buffLength: 0

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c0848f6e83ea2b43831074a1ce9fd62, type: 3}
+  m_Name: StrengthBuff
+  m_EditorClassIdentifier: 
+  skillType: 4
+  skilImage: {fileID: 21300000, guid: 64deda70ced66044a84e647c2829fa4b, type: 3}
+  skillEffect: {fileID: 1825083354217622, guid: 91e98aefadb6c9944a1451f9058afb17,
+    type: 2}
+  skillName: Shout
+  skillCost: 15
+  baseDamage: 0
+  damageMultiplier: 0
+  dealDamage: 0
+  buffLength: 3

@@ -9,6 +9,7 @@ public class UIController : MonoBehaviour
     public GameObject damageCanvas;
     public GameObject skillBar;
     public List<UISkillButton> skillButtons;
+    public Slider expBar;
 
     void OnEnable()
     {
@@ -33,7 +34,7 @@ public class UIController : MonoBehaviour
         PlayerStats data = FindObjectOfType<GameManager>().playerData;
         foreach (UISkillButton button in skillButtons)
         {
-            if(data.skills[iterator])
+            if (data.skills[iterator])
             {
                 button.GetComponent<Image>().sprite = data.skills[iterator].skilImage;
                 button.skillData = data.skills[iterator];
@@ -44,5 +45,10 @@ public class UIController : MonoBehaviour
             }
             iterator++;
         }
+    }
+
+    public void SetExp(float amount, float max)
+    {
+        expBar.value = amount / max;
     }
 }

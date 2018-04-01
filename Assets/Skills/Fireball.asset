@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: Fireball
   m_EditorClassIdentifier: 
   skillType: 1
-  skilImage: {fileID: 21300000, guid: 394e93ce356b57344903a08ff72fcab2, type: 3}
+  skilImage: {fileID: 21300000, guid: 2c3c88768628291478b7850e1369bb93, type: 3}
   skillEffect: {fileID: 1353715889827770, guid: 00c81f81ac0d5054da3450b0ffdc8212,
     type: 2}
   skillName: Fireball
@@ -20,3 +20,4 @@ MonoBehaviour:
   baseDamage: 35
   damageMultiplier: 2
   dealDamage: 0
+  buffLength: 0

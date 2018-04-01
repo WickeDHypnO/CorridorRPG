@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using DG.Tweening;
 public class Enemy : MonoBehaviour
 {
 
@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
     public Transform head;
     float maxHealth;
     bool selectable = true;
+    public SkinnedMeshRenderer skinned;
 
     void OnDestroy()
     {
@@ -24,6 +25,7 @@ public class Enemy : MonoBehaviour
         maxHealth = enemyData.health;
         currentStats = Instantiate(enemyData);
         healthSlider = FindObjectOfType<UIHealthBars>().GetHealthBar();
+        currentStats.CalculateExperienceGiven();
         // FindObjectOfType<FightController>().enemies.Add(this);
     }
 
@@ -63,8 +65,12 @@ public class Enemy : MonoBehaviour
     {
         selectable = false;
         FindObjectOfType<UIHealthBars>().RevokeHealthBar(healthSlider);
+        FindObjectOfType<GameManager>().playerGameData.experience += currentStats.experienceGiven;
+        FindObjectOfType<GameManager>().UpdateExp();
+        skinned.material.DOFloat(0,"Float_19181232", 2.3f);
         FindObjectOfType<FightController>().Select(null);
     }
+
 
     public void AttackPlayer()
     {

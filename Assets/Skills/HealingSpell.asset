@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: HealingSpell
   m_EditorClassIdentifier: 
   skillType: 3
-  skilImage: {fileID: 21300000, guid: af1f1b45fa6b5e64894c04ceb8a592f7, type: 3}
+  skilImage: {fileID: 21300000, guid: b6aa8c7673366ff40afee3b18c7ba4c4, type: 3}
   skillEffect: {fileID: 1444748693522502, guid: 97edc3a285c13f44a98e1bf8f5c31d03,
     type: 2}
   skillName: Heal
@@ -20,3 +20,4 @@ MonoBehaviour:
   baseDamage: 25
   damageMultiplier: 3
   dealDamage: 0
+  buffLength: 0

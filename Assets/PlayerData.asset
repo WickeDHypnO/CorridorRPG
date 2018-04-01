@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   level: 2
+  experience: 2
+  experienceNeeded: 22
   health: 300
   mana: 100
   manaRegenPerTurn: 10
@@ -21,4 +23,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4452d8184b3679c478905ac2a818e91e, type: 2}
   - {fileID: 11400000, guid: 99f88a50f19ce984fa4e581fc254a2ba, type: 2}
   - {fileID: 11400000, guid: f43959a233926df44b77bd8b2ba689d0, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 20b2381ea12523f48b03f7bced03e06e, type: 2}

@@ -44,6 +44,7 @@ public class FightController : MonoBehaviour
     {
         //Enable skill buttons
         FindObjectOfType<UIController>().SetSkillBarVisible(true);
+        FindObjectOfType<UIBuffBar>().UpdateBuffs();
         FindObjectOfType<GameManager>().SpendMana(-FindObjectOfType<GameManager>().playerGameData.manaRegenPerTurn);
         // EndPlayerTurn();
         Debug.Log("playerTurn");
@@ -58,8 +59,12 @@ public class FightController : MonoBehaviour
         }
         else
         {
-            if (skillData.skillType == SkillType.Heal)
+            if (skillData.skillType == SkillType.Heal){
                 FindObjectOfType<GameManager>().DealDamageToPlayer(-(skillData.baseDamage + FindObjectOfType<GameManager>().playerGameData.level * skillData.damageMultiplier));
+            }
+            else{
+
+            }
         }
         if (skillData.skillType != SkillType.Buff && skillData.skillType != SkillType.Heal)
         {
@@ -97,7 +102,7 @@ public class FightController : MonoBehaviour
 
     IEnumerator StartEnemyTurn()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         if (attacking.Count > 1)
         {
             while (attacking[0].GetComponent<Enemy>())

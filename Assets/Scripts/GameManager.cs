@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
 
     MapGenerator generator;
     int currentRoom = 1;
@@ -14,22 +15,29 @@ public class GameManager : MonoBehaviour {
     public Slider manaSlider;
     float maxHealth;
     float maxMana;
-    [HideInInspector]
+    //[HideInInspector]
     public PlayerStats playerGameData;
     public UIController uiController;
     public GameObject boss;
+    List<SkillData> buffs;
+    public UIBuffBar buffBar;
+    public GameObject levelUpEffect;
 
-	void Start () {
+    void Start()
+    {
+        playerData.CalculateExpForNextLevel();
         playerGameData = Instantiate(playerData);
         generator = FindObjectOfType<MapGenerator>();
         maxHealth = playerData.health;
         maxMana = playerData.mana;
-	}
-	
-	public void SpawnEnemies () {
+        uiController.SetExp(playerGameData.experience, playerGameData.experienceNeeded);
+    }
+
+    public void SpawnEnemies()
+    {
         List<Transform> spawns = generator.placedRooms[currentRoom].GetComponent<Room>().spawnPoints;
         int enemy = Random.Range(0, enemies.Count);
-        foreach(Transform t in spawns)
+        foreach (Transform t in spawns)
         {
             Quaternion look = Quaternion.LookRotation(Camera.main.transform.position - t.position);
             look.eulerAngles = new Vector3(0, look.eulerAngles.y, 0);
@@ -37,8 +45,19 @@ public class GameManager : MonoBehaviour {
         }
         currentRoom++;
         FindObjectOfType<FightController>().StartFight();
-	}
+    }
 
+    public void UpdateExp()
+    {
+        if(playerGameData.experience >= playerGameData.experienceNeeded)
+        {
+            playerGameData.experience -= playerGameData.experienceNeeded;
+            playerGameData.level++;
+            playerGameData.CalculateExpForNextLevel();
+            Instantiate(levelUpEffect, Vector3.zero, Quaternion.identity);
+        }
+        uiController.SetExp(playerGameData.experience, playerGameData.experienceNeeded);
+    }
     public void SpawnBoss()
     {
         List<Transform> spawns = generator.placedRooms[currentRoom].GetComponent<Room>().spawnPoints;
@@ -54,7 +73,7 @@ public class GameManager : MonoBehaviour {
     public void DeleteEnemy(GameObject enemy)
     {
         aliveEnemies.Remove(enemy);
-        if(aliveEnemies.Count <= 0)
+        if (aliveEnemies.Count <= 0)
         {
             FindObjectOfType<CameraMovement>().MoveToNextWaypoint();
         }
@@ -65,7 +84,7 @@ public class GameManager : MonoBehaviour {
         playerGameData.health -= damage;
         healthSlider.value = playerGameData.health / maxHealth;
         uiController.ShowDamage();
-        if(playerGameData.health <= 0)
+        if (playerGameData.health <= 0)
         {
             //DEAD
         }
@@ -80,5 +99,10 @@ public class GameManager : MonoBehaviour {
     internal void NextRoom()
     {
         FindObjectOfType<CameraMovement>().MoveToNextWaypoint();
+    }
+
+    public void AddBuff(SkillData data)
+    {
+        buffBar.AddBuff(data);
     }
 }

@@ -2063,6 +2063,7 @@ MonoBehaviour:
   healthSlider: {fileID: 0}
   effectPosition: {fileID: 4227866217051818}
   head: {fileID: 4818008570214906}
+  skinned: {fileID: 137313500825640044}
 --- !u!114 &114977843505219156
 MonoBehaviour:
   m_ObjectHideFlags: 1

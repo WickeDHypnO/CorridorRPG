@@ -18,7 +18,7 @@ public class CameraMovement : MonoBehaviour {
         if (!canMove)
             return;
         currentWaypoint++;
-        if (generator.placedRooms[currentWaypoint + 1])
+        if (currentWaypoint+1 < generator.placedRooms.Count)
         {
             DOTween.Sequence().Append(transform.DOMove(generator.placedRooms[currentWaypoint].GetComponent<Room>().waypoint.position, 2f))
                 .Append(transform.DOLookAt(generator.placedRooms[currentWaypoint + 1].GetComponent<Room>().waypoint.position, 1f))
@@ -27,6 +27,7 @@ public class CameraMovement : MonoBehaviour {
         }
         else
         {
+            FindObjectOfType<ItemDropController>().DropItems();
             //Detected end of dungeon
         }
         FindObjectOfType<RoomEnabler>().CurrentRoom++;

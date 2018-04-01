@@ -22,4 +22,5 @@ public class SkillData : ScriptableObject
     public float baseDamage;
     public float damageMultiplier;
     public bool dealDamage;
+    public int buffLength;
 }
