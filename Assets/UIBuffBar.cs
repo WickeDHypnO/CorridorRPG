@@ -17,7 +17,7 @@ public class UIBuffBar : MonoBehaviour {
 	// Use this for initialization
 	public void AddBuff (SkillData data) {
 		var buff = Instantiate(buffPrefab, transform);
-		buff.GetComponentInChildren<Image>().sprite = data.skilImage;
+		buff.GetComponentsInChildren<Image>()[2].sprite = data.skilImage;
 		buff.GetComponentInChildren<Text>().text = data.buffLength.ToString();
 		var ui = new BuffUI();
 		ui.data = data;

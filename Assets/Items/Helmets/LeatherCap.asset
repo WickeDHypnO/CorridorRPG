@@ -13,4 +13,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   icon: {fileID: 21300000, guid: bcbadba8823823048a4647cd4048a009, type: 3}
+  rarity: 0
+  rarityMultiplier: 1.2
+  baseLevel: 1
+  levelRandom: 3
+  level: 0
+  levelMultiplier: 1.2
   armor: 1
+  currentArmor: 0
