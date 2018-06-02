@@ -73,7 +73,7 @@
 #define NO_ADDITIONAL_LIGHTS
 
 #include "UnityStandardParticles.cginc"
-#include "LightweightLighting.cginc"
+#include "LightweightPipeline.cginc"
 
 	struct VertexOutputLit
 	{
